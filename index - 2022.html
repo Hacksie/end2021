@@ -1,0 +1,18 @@
+<canvas id=c width=640 height=480/><script>
+k="010120120210210000000200210320320410410300300210410520520610610400400600";y1=(k+"720700").split("");y2=(k+"610720720810810600600800").split("")
+s=`void main(){gl_`;u=`;uniform mat4 `;v=`attribute vec4 v${u}m${u}p;${s}Position=p*m*v;}`;fs=`${s}FragColor=vec4(0,0,0,1);}`
+r=f=t=0;H=Math;F=l=>new Float32Array(l);G=document.querySelector('#c').getContext('webgl');d=34962;e=10;g=11
+K=_=>(o=F(16),o[0]=1,o[5]=1,o[e]=1,o[15]=1,o)
+X=(t,n,r,a,z)=>(u=1/H.tan(n/2),t[0]=u/r,t[5]=u,t[g]=-1,(o=1/(a-z),t[e]=(z+a)*o,t[14]=2*z*a*o))
+T=(o,a,x,y,z)=>{o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[e]*z+a[14];o[15]=a[3]*x+a[7]*y+a[g]*z+a[15]}
+Z=(o,a,r,x,y,z)=>{l=1/H.hypot(x,y,z);x*=l;y*=l;z*=l;s=H.sin(r);c=H.cos(r);u=1-c;
+v=x*x*u+c;w=y*x*u+z*s;n=z*x*u-y*s;l=x*y*u-z*s;j=y*y*u+c;i=z*y*u+x*s;h=x*z*u+y*s;b7=y*z*u-x*s;b8=z*z*u+c;
+o[0]=a[0]*v+a[4]*w+a[8]*n;o[1]=a[1]*v+a[5]*w+a[9]*n;o[2]=a[2]*v+a[6]*w+a[e]*n;o[3]=a[3]*v+a[7]*w+a[g]*n;o[4]=a[0]*l+a[4]*j+a[8]*i;o[5]=a[1]*l+a[5]*j+a[9]*i;
+o[6]=a[2]*l+a[6]*j+a[e]*i;o[7]=a[3]*l+a[7]*j+a[g]*i;o[8]=a[0]*h+a[4]*b7+a[8]*b8;o[9]=a[1]*h+a[5]*b7+a[9]*b8;o[10]=a[2]*h+a[6]*b7+a[e]*b8;o[g]=a[3]*h+a[7]*b7+a[g]*b8}
+A=f=>requestAnimationFrame(f);B=b=>G.bindBuffer(d,b);I=a=>(b=G.createBuffer(),B(b),G.bufferData(d,F(a),d+82),b);
+L=(t,c,p)=>{s=G.createShader(t);G.shaderSource(s,c);G.compileShader(s);G.attachShader(p,s)}
+P=_=>(p=G.createProgram(),L(d+671,v,p),L(d+670,fs,p),G.linkProgram(p),p);U=(p,u)=>G.getUniformLocation(p,u);M=(s,m)=>G.uniformMatrix4fv(s,0,m)
+S=_=>{k=P();R=n=>(n*=1e-3,D(k,G.getAttribLocation(k,'v'),U(k,'p'),U(k,'m'),I(y1),y1.length,I(y2),y2.length,n-t),t=n,A(R));A(R)}
+D=(s,v,a,b,g,i,h,j,d)=>{G.clearColor(0,0,0,0);G.clear(16384);p=K();m=K();X(p,0.785,1.33,.1,e);T(m,m,-4,-1,-e);Z(m,m,r-1.57,1,0,0);B(f?h:g);G.vertexAttribPointer(v,3,5126,0,0,0);G.enableVertexAttribArray(v);G.useProgram(s);M(a,p);M(b,m);G.drawArrays(1,0,(f?j:i)/3);r+=d;if(6.28<r){r=0,f=!f}}
+S()
+</script>
